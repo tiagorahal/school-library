@@ -21,7 +21,6 @@ Metrics/BlockLength:
 Metrics/CyclomaticComplexity:
   Enabled: false
 
-
 Style/Documentation:
   Enabled: false
 Style/ClassAndModuleChildren:
@@ -34,6 +33,8 @@ Style/DefWithParentheses:
   Enabled: false
 Style/FrozenStringLiteralComment:
   EnforcedStyle: never
+Style/OptionalBooleanParameter:
+  Enabled: false
 
 Layout/HashAlignment:
   EnforcedColonStyle: key
