@@ -1,5 +1,3 @@
-require 'pry'
-
 class Corrector
   def correct_name(name)
     if name.length <= 10
