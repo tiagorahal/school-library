@@ -1,145 +1,154 @@
-require_relative './files/student'
-require_relative './files/teacher'
-require_relative './files/book'
-require_relative './files/rental'
-require_relative './files/person'
+require_relative 'files/book'
+require_relative 'files/student'
+require_relative 'files/teacher'
+require_relative 'files/rental'
+require 'pry'
 
-class App
-  def initialize
-    @book = []
-    @people = []
-    @rental = []
-  end
+def add_to_list(list, item)
+  list << item
+  'Created sucessfully'
+end
 
-  def run
-    menu = ["\nPlease choose an option by entering a number", '1 - List all books', '2 - List all people',
-            '3 - Create a person', '4 - Create a book', '5 - Create a rental',
-            '6 - List all rentals for a given person id', '7 - Exit']
-    menu.each do |options|
-      puts options
-    end
-    option = gets.chomp.to_i
-    check_option(option)
-  end
+def create_book(list)
+  puts ' '
+  puts 'Enter a book title'
+  title = gets.chomp
+  puts ' '
+  puts 'Enter the author of the book'
+  author = gets.chomp
+  book = Book.new(title, author)
+  add_to_list(list, book)
+end
 
-  def create_teachers
-    print 'Age: '
-    age = gets.chomp.to_i
-    print 'Name: '
-    name = gets.chomp
-    print 'Specialization: '
-    specialization = gets.chomp
-    @people << Teacher.new(age, name, true, specialization)
-    puts 'Person created successfully'
-    run
-  end
+def create_person(list)
+  puts "\n Do you want to create a (0) Student or a (1) Teacher?"
+  input = gets.chomp
+  create_student(list) if input == '0'
+  create_teacher(list) if input == '1'
+end
 
-  def create_students
-    print 'Age: '
-    age = gets.chomp.to_i
-    print 'Name: '
-    name = gets.chomp
-    print 'Has parente permission? [Y/N]: '
-    parent_permission = gets.chomp
-    parent_permission = false if parent_permission == 'n'
-    @people << Student.new(age, name, parent_permission)
-    puts 'Person created successfully'
-    run
-  end
+def create_student(list)
+  puts "\nEnter the age of the student"
+  age = gets.chomp
+  puts "\nEnter the name of the student"
+  name = gets.chomp
+  name == '' ? false : name
+  puts 'The person has partent_permission?'
+  puts '(0) No permission'
+  puts '(1) Permission'
+  permission = gets.chomp
+  student = Student.new(age, name, parent_permission: permission == 1)
+  add_to_list(list, student)
+end
 
-  def create_person
-    print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
-    option = gets.chomp.to_i
-    case option
-    when 1
-      create_students
-    when 2
-      create_teachers
-    else
-      p 'Invalid number, returning to menu!'
-      run
-    end
-  end
+def create_teacher(list)
+  puts "\nEnter the age of the teacher"
+  age = gets.chomp
+  puts "\nEnter the name of the teacher"
+  name = gets.chomp
+  name == '' ? false : name
+  puts "\nEnter the specialization of the teacher"
+  spec = gets.chomp
+  teacher = Teacher.new(spec, age, name)
+  add_to_list(list, teacher)
+end
 
-  def create_book
-    print 'Title: '
-    title = gets.chomp
-    print 'Author: '
-    author = gets.chomp
-    @book << Book.new(title, author)
-    puts 'New book added!'
-    run
-  end
+def validate_num(input, list)
+  return unless input.to_i > (list.length - 1) || input == ''
 
-  def create_rental
-    puts "\nSelect a book from the following list by number: "
-    @book.each_with_index do |show, index|
-      puts "#{index}) Title: #{show.title}  Author: #{show.author}"
-    end
-    book_rented = gets.chomp.to_i
-    book_rented = @book[book_rented]
-    puts "\nSelect a person from the following list by number (not ID): "
-    @people.each_with_index do |show, index|
-      puts "#{index}) [#{show.class}] Name: #{show.name}, ID: #{show.id}, Age: #{show.age}"
-    end
-    renter = gets.chomp.to_i
-    renter = @people[renter]
-    print "\nDate: "
-    date = gets.chomp
-    Rental.new(date, book_rented, renter)
-    puts 'Rental created successfully'
-    run
-  end
+  puts 'Please enter a valid number'
+  input = gets.chomp
+  validate_num(input, list)
+end
 
-  def show_books
-    @book.each do |show|
-      puts "Title: #{show.title}  Author: #{show.author}"
-    end
-    run
-  end
+def validate_date(input)
+  return unless input == ''
 
-  def show_people
-    @people.each do |show|
-      puts "[#{show.class}] Name: #{show.name}, ID: #{show.id}, Age: #{show.age}"
-    end
-    run
-  end
+  puts 'Please enter a valid number'
+  input = gets.chomp
+  validate_date(input)
+end
 
-  def rental_id
-    print 'ID of person: '
-    id = gets.chomp.to_i
-    @people.each do |person|
-      next unless id == person.id
+def create_rental(list, book_list, people_list)
+  puts "\nChoose a book from the list"
+  book_list.each { |b| puts "(#{book_list.index(b)}) Title: '#{b.title}' Author: '#{b.author}'" }
+  book_choice = gets.chomp
+  validate_num(book_choice, book_list)
+  puts "\nChoose a person"
+  people_list.each { |person| puts "(#{people_list.index(person)}) Name: '#{person.name}' ID: '#{person.id}'" }
+  person_choice = gets.chomp
+  validate_num(person_choice, people_list)
+  puts "\nPlease enter a day"
+  day = gets.chomp
+  puts "\nPlease enter a month"
+  month = gets.chomp
+  puts "\nPlease enter a year"
+  year = gets.chomp
+  date = "#{day}/#{month}/#{year}"
+  validate_date(date)
+  rental = Rental.new(date, people_list[person_choice.to_i], book_list[book_choice.to_i])
+  puts 'Created successfully'
+  add_to_list(list, rental)
+end
 
-      target = person.rentals
-      puts "\nRentals: "
-      target.each do |rented|
-        puts "Date: #{rented.date}, Book: #{rented.book.title} by #{rented.book.author}"
-      end
-    end
-    run
-  end
+def show_books(list)
+  list.each { |b| puts "\nTitle: '#{b.title}' Author: '#{b.author}'" }
+end
 
-  def finish_execution
-    puts '--Good Bye--'
-    exit(true)
-  end
+def show_people(list)
+  list.each { |person| puts "\n[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
+end
 
-  def check_option(option)
-    option -= 1
-    functions = [method(:show_books), method(:show_people), method(:create_person),
-                 method(:create_book), method(:create_rental), method(:rental_id), method(:finish_execution)]
-    functions.each_with_index do |a, index|
-      next unless index == option
+def show_rentals(list)
+  puts "\nPlease enter the id of the person"
+  id = gets.chomp
 
-      a.call
-    end
+  puts "\nRentals:"
+  list.each do |r|
+    puts "Date: #{r.date}, Book: '#{r.book.title}', Author: '#{r.book.author}'" if id.to_i == r.person.id
   end
 end
 
-def main
-  main = App.new
-  main.run
+def show_options
+  puts ' '
+  puts 'Please choose an option by enterin a number:'
+  puts '1 - List all books'
+  puts '2 - List all people'
+  puts '3 - Create a person'
+  puts '4 - Create a book'
+  puts '5 - Create a rental'
+  puts '6 - List all rentals for a given person id'
+  puts '7 - Exit'
 end
-puts "Welcome to School Library App!\n"
+
+def input_process(input, book_list, people_list, rentals_list)
+  case input.to_i
+  when 1
+    show_books(book_list)
+  when 2
+    show_people(people_list)
+  when 3
+    create_person(people_list)
+  when 4
+    create_book(book_list)
+  when 5
+    create_rental(rentals_list, book_list, people_list)
+  when 6
+    show_rentals(rentals_list)
+  when 7
+    return
+  end
+  main(book_list, people_list, rentals_list)
+end
+
+def main(book_list_input = [], people_list_input = [], rentals_list_input = [])
+  book_list = book_list_input
+  people_list = people_list_input
+  rentals_list = rentals_list_input
+  show_options
+  user_input = gets.chomp
+  input_process(user_input, book_list, people_list, rentals_list)
+end
+
 main
+# This is outrageous Microverse. Thanks.
