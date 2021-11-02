@@ -23,7 +23,7 @@ To get a local copy up and running follow these simple example steps.
 
 - run the main.rb file (if you are on windows you just need to run `main` in other systems you need to run `ruby main.rb`)
 
-## Author
+## Authors
 
 👤 **Tiago Rahal Aires**
 
@@ -32,9 +32,9 @@ To get a local copy up and running follow these simple example steps.
 
 👤 **Christian Erick Contreras**
 
-- GitHub: [@eri8-9](https://github.com/eri8-9)
-- Linkedin: [LinkedIn](https://www.linkedin.com/in/christian-erick/)
-- Twitter: [@ChristianErick_](https://twitter.com/ChristianErick_)
+- [GitHub](https://github.com/eri8-9)
+- [LinkedIn](https://www.linkedin.com/in/christian-erick/)
+- [Twitter](https://twitter.com/ChristianErick_)
 
 ## 🤝 Contributing
 
@@ -45,3 +45,7 @@ Feel free to check the [issues page](https://github.com/tiagorahal/school-librar
 ## Show your support
 
 Give a ⭐️ if you like this project!
+
+## 📝 License
+
+This project is [MIT](./LICENSE) licensed.
