@@ -23,7 +23,7 @@ To get a local copy up and running follow these simple example steps.
 
 - run the main.rb file (if you are on windows you just need to run `main` in other systems you need to run `ruby main.rb`)
 
-## Author
+## Authors
 
 👤 **Tiago Rahal Aires**
 
