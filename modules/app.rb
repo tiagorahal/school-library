@@ -1,7 +1,7 @@
-require_relative '../classes/book'
-require_relative '../classes/student'
-require_relative '../classes/teacher'
-require_relative '../classes/rental'
+require_relative '../Classes/book'
+require_relative '../Classes/student'
+require_relative '../Classes/teacher'
+require_relative '../Classes/rental'
 require 'json'
 
 module AppFunctions
@@ -138,3 +138,16 @@ module AppFunctions
       validate_date(input)
     end
   end
+
+  private
+
+  def save_files()
+    routes = ['data/books.json', 'data/people.json', 'data/rentals.json']
+    data = [@book_list, @people_list, @rentals_list]
+    (0..2).each do |i|
+      File.open(routes[i], 'w+') do |file|
+        file.write(JSON[data[i]])
+      end
+    end
+  end
+end
