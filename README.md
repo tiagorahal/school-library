@@ -30,6 +30,12 @@ To get a local copy up and running follow these simple example steps.
 - [GitHub](https://github.com/tiagorahal)
 - [LinkedIn](https://www.linkedin.com/in/tiagorahal/)
 
+👤 **Christian Erick Contreras**
+
+- GitHub: [@eri8-9](https://github.com/eri8-9)
+- Linkedin: [LinkedIn](https://www.linkedin.com/in/christian-erick/)
+- Twitter: [@ChristianErick_](https://twitter.com/ChristianErick_)
+
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome!

@@ -138,16 +138,3 @@ module AppFunctions
       validate_date(input)
     end
   end
-
-  private
-
-  def save_files()
-    routes = ['data/books.json', 'data/people.json', 'data/rentals.json']
-    data = [@book_list, @people_list, @rentals_list]
-    (0..2).each do |i|
-      File.open(routes[i], 'w+') do |file|
-        file.write(JSON[data[i]])
-      end
-    end
-  end
-end

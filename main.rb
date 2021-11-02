@@ -1,7 +1,9 @@
-require_relative 'modules/app_functions'
+require_relative 'modules/app'
 
 class InputProcess
   include AppFunctions
+
+
   def initialize(book_list, people_list, rentals_list)
     @book_list = book_list
     @people_list = people_list
@@ -14,6 +16,8 @@ class InputProcess
 
   def start_app
     user_input = gets.chomp.to_i
+feature/data
+
     case user_input
     when 1
       @show.books(@book_list)
@@ -40,5 +44,3 @@ def main(book_list_input = [], people_list_input = [], rentals_list_input = [])
   rentals_list = rentals_list_input
   InputProcess.new(book_list, people_list, rentals_list)
 end
-
-main
