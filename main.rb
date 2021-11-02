@@ -3,7 +3,6 @@ require_relative 'modules/app'
 class InputProcess
   include AppFunctions
 
-
   def initialize(book_list, people_list, rentals_list)
     @book_list = book_list
     @people_list = people_list
@@ -16,7 +15,7 @@ class InputProcess
 
   def start_app
     user_input = gets.chomp.to_i
-feature/data
+    feature / data
 
     case user_input
     when 1
