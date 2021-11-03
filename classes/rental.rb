@@ -1,6 +1,6 @@
-require_relative '../Classes/book'
-require_relative '../Classes/student'
-require_relative '../Classes/teacher'
+require_relative '../classes/book'
+require_relative '../classes/student'
+require_relative '../classes/teacher'
 
 class Rental
   attr_reader :person, :book
