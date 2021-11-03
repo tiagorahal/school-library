@@ -1,6 +1,6 @@
-require_relative '../classes/book'
-require_relative '../classes/student'
-require_relative '../classes/teacher'
+require_relative '../Classes/book'
+require_relative '../Classes/student'
+require_relative '../Classes/teacher'
 
 class Rental
   attr_reader :person, :book
@@ -11,7 +11,6 @@ class Rental
 
     @person = person
     if person.instance_of?(Teacher) || person.instance_of?(Student)
-      p 'Im here'
       person.rentals << self
     else
       person['rentals'] << self
@@ -19,7 +18,6 @@ class Rental
 
     @book = book
     if book.instance_of?(Book)
-      p 'Im here'
       book.rentals << self
     else
       book['rentals'] << self
